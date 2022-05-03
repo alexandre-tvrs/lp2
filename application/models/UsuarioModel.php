@@ -1,6 +1,8 @@
 <?php
+include_once APPPATH.'libraries/component/Table.php';
 
 class UsuarioModel extends CI_Model {
+
     public function create() {
         if (sizeof($_POST) == 0 ) return;
 
@@ -30,7 +32,23 @@ class UsuarioModel extends CI_Model {
     }
 
     public function listUser() {
-      
+      $this->load->library('pessoa');
+      $data = $this->pessoa->listaPessoa();
+
+      foreach ($data as $key => $row) {
+        $data[$key]['btn'] = $this->editHandler($row);
+      }
+
+      $label = ['', 'Nome', 'Sobrenome', 'Email', 'Telefone' ,''];
+      $table = new Table($data, $label);
+      return $table->getHTML();
+    }
+
+    private function editHandler($row) {
+        $html  = '<a><i id="'.$row['id'];
+        $html .= '"class="fas fa-edit mr-3 ';
+        $html .= 'indigo-text edit_btn"></i></a>';
+        return $html;
     }
 
 }

@@ -12,7 +12,7 @@ class Usuario extends MY_Controller{
   public function index() {
     $v['table'] = $this->user->listUser();
 
-    $html = $this->load->view('user/list_user');
+    $html = $this->load->view('user/list_user', $v, true);
     $this->show($html);
   }
 
