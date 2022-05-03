@@ -4,7 +4,7 @@ class UsuarioModel extends CI_Model {
     public function create() {
         if (sizeof($_POST) == 0 ) return;
 
-        if (validator::validateUser()) {
+        if ($this->validator->validateUser()) {
 
           $data['nome'] = $this->input->post('nome');
           $data['snome'] = $this->input->post('snome');
@@ -24,7 +24,7 @@ class UsuarioModel extends CI_Model {
           $this->mail->create($mail);
 
         } else {
-          return validation_error();
+          return validation_errors();
         }
 
     }
