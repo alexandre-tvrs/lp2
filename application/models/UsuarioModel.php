@@ -1,5 +1,6 @@
 <?php
 include_once APPPATH.'libraries/component/Table.php';
+include_once APPPATH.'libraries/util/ButtonGenerator.php';
 
 class UsuarioModel extends CI_Model {
 
@@ -36,7 +37,7 @@ class UsuarioModel extends CI_Model {
       $data = $this->pessoa->listaPessoa();
 
       foreach ($data as $key => $row) {
-        $data[$key]['btn'] = $this->editHandler($row);
+        $data[$key]['btn'] = ButtonGenerator::editHandler($row);
       }
 
       $label = ['', 'Nome', 'Sobrenome', 'Email', 'Telefone' ,''];
@@ -44,11 +45,6 @@ class UsuarioModel extends CI_Model {
       return $table->getHTML();
     }
 
-    private function editHandler($row) {
-        $html  = '<a><i id="'.$row['id'];
-        $html .= '"class="fas fa-edit mr-3 ';
-        $html .= 'indigo-text edit_btn"></i></a>';
-        return $html;
-    }
+
 
 }

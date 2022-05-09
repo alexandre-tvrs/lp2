@@ -1,6 +1,7 @@
-<?php 
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 include_once APPPATH.'libraries/component/Table.php';
+include_once APPPATH.'libraries/util/ButtonGenerator.php';
 
 class ContasModel extends CI_Model{
 
@@ -16,7 +17,8 @@ class ContasModel extends CI_Model{
             $aux['parceiro'] = $row['parceiro'];
             $aux['descricao'] = $row['descricao'];
             $aux['valor'] = $row['valor'];
-            $aux['status'] = $this->statusHandler($row). $this->editHandler($row);;
+            $aux['status'] = $this->statusHandler($row).
+            ButtonGenerator::editHandler($row);
             $data[] = $aux;
         }
 
@@ -30,13 +32,6 @@ class ContasModel extends CI_Model{
         $html  = '<a><i id="'.$row['id'];
         $html .= '"class="fas fa-check-circle mr-3 ';
         $html .= $color.'-text pay_btn"></i></a>';
-        return $html;
-    }
-
-    private function editHandler($row) {
-        $html  = '<a><i id="'.$row['id'];
-        $html .= '"class="fas fa-edit mr-3 ';
-        $html .= 'indigo-text edit_btn"></i></a>';
         return $html;
     }
 
@@ -55,15 +50,15 @@ class ContasModel extends CI_Model{
                 $this->bill->edita($data);
             } else {
                 $this->bill->cria($data);
-            }            
+            }
         }
     }
 
     private function validate() {
         $this->form_validation->set_rules('parceiro', 'Parceiro comercial', 'required|min_length[5]|max_length[100]');
         $this->form_validation->set_rules('descricao', 'Descrição da conta', 'required|min_length[5]|max_length[100]');
-        $this->form_validation->set_rules('valor', 'Preço a ser pago', 'required|greater_than[0]');  
-        $this->form_validation->set_rules('mes', 'Mês de pagamento', 'required|greater_than[0]|less_than[13]');      
+        $this->form_validation->set_rules('valor', 'Preço a ser pago', 'required|greater_than[0]');
+        $this->form_validation->set_rules('mes', 'Mês de pagamento', 'required|greater_than[0]|less_than[13]');
         $this->form_validation->set_rules('ano', 'Ano de pagamento', 'required|greater_than[2019]|less_than[2031]');
     }
 
