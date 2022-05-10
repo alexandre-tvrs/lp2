@@ -17,7 +17,7 @@ class ContasModel extends CI_Model{
             $aux['parceiro'] = $row['parceiro'];
             $aux['descricao'] = $row['descricao'];
             $aux['valor'] = $row['valor'];
-            $aux['status'] = $this->statusHandler($row).
+            $aux['status'] = ButtonGenerator::statusHandler($row).
             ButtonGenerator::editHandler($row);
             $data[] = $aux;
         }
@@ -27,13 +27,7 @@ class ContasModel extends CI_Model{
         return $table->getHTML();
     }
 
-    private function statusHandler($row) {
-        $color = $row['liquidada'] ? 'blue' : 'red';
-        $html  = '<a><i id="'.$row['id'];
-        $html .= '"class="fas fa-check-circle mr-3 ';
-        $html .= $color.'-text pay_btn"></i></a>';
-        return $html;
-    }
+
 
     public function cria($tipo) {
         if(sizeof($_POST) == 0) return;

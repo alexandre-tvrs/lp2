@@ -4,6 +4,12 @@ include_once APPPATH.'libraries/util/ButtonGenerator.php';
 
 class UsuarioModel extends CI_Model {
 
+  function __construct() {
+    $this->load->library('pessoa');
+    $this->load->library('mail');
+    $this->load->library('telefone');
+  }
+
     public function create() {
         if (sizeof($_POST) == 0 ) return;
 
@@ -11,7 +17,10 @@ class UsuarioModel extends CI_Model {
 
           $data['nome'] = $this->input->post('nome');
           $data['snome'] = $this->input->post('snome');
-          $data['senha'] = $this->input->post('senha');
+
+          $pass = $this->input->post('senha');
+          $data['senha'] = md5($pass);
+
 
           $this->load->library('pessoa');
           $id = $this->pessoa->create($data);
@@ -33,11 +42,12 @@ class UsuarioModel extends CI_Model {
     }
 
     public function listUser() {
-      $this->load->library('pessoa');
       $data = $this->pessoa->listaPessoa();
 
+      $url = base_url('usuario/editar');
+
       foreach ($data as $key => $row) {
-        $data[$key]['btn'] = ButtonGenerator::editHandler($row);
+        $data[$key]['btn'] = ButtonGenerator::editHandler($row, $url);
       }
 
       $label = ['', 'Nome', 'Sobrenome', 'Email', 'Telefone' ,''];
@@ -45,6 +55,18 @@ class UsuarioModel extends CI_Model {
       return $table->getHTML();
     }
 
+    public function loadUser($id){
+      $pessoa = $this->pessoa->getById($id);
+      unset($pessoa['senha']);
 
+      $email = $this->mail->getByUserId($id);
+      $v['email'] = $email['endereco'];
+
+      $telefone = $this->telefone->getByUserId($id);
+      $v['telefone'] = $telefone['numero'];
+
+      $_POST = array_merge($pessoa, $v);
+
+    }
 
 }

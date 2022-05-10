@@ -23,9 +23,8 @@ class Usuario extends MY_Controller{
     $this->show($html);
     }
 
-  public function editar() {
-    $_POST = $this->user->load($id);
-
+  public function editar($id) {
+    $this->user->loadUser($id);
     $html = $this->load->view('user/form_user', null, true);
     $this->show($html);
   }
