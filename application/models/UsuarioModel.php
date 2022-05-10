@@ -13,16 +13,10 @@ class UsuarioModel extends CI_Model {
     public function create() {
         if (sizeof($_POST) == 0 ) return;
 
-        if ($this->validator->validateUser()) {
+        if ($this->validator->validateUser(true)) {
 
-          $data['nome'] = $this->input->post('nome');
-          $data['snome'] = $this->input->post('snome');
+          $data = $this->readPostData();
 
-          $pass = $this->input->post('senha');
-          $data['senha'] = md5($pass);
-
-
-          $this->load->library('pessoa');
           $id = $this->pessoa->create($data);
 
           $fone['numero'] = $this->input->post('telefone');
@@ -39,6 +33,16 @@ class UsuarioModel extends CI_Model {
           return validation_errors();
         }
 
+    }
+
+    public function update(){
+      if(sizeof($_POST) == 0) return;
+
+      if($this->validator->validateUser(true)) {
+
+      } else {
+        return validation_errors();
+      }
     }
 
     public function listUser() {
@@ -67,6 +71,14 @@ class UsuarioModel extends CI_Model {
 
       $_POST = array_merge($pessoa, $v);
 
+    }
+
+    private function readPostData(){
+      $data['nome'] = $this->input->post('nome');
+      $data['snome'] = $this->input->post('snome');
+
+      $pass = $this->input->post('senha');
+      $data['senha'] = md5($pass);
     }
 
 }
