@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26-Abr-2022 às 02:58
--- Versão do servidor: 10.4.21-MariaDB
--- versão do PHP: 8.0.10
+-- Tempo de geração: 17-Maio-2022 às 00:20
+-- Versão do servidor: 10.4.24-MariaDB
+-- versão do PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -48,12 +48,12 @@ INSERT INTO `conta` (`id`, `parceiro`, `descricao`, `valor`, `mes`, `ano`, `tipo
 (2, 'Casas Bahia', 'Notebook', '3000.00', 1, 2021, 'pagar', 0, '2021-01-26 00:03:52'),
 (3, 'Prefeitura de Sucupira', 'Salário', '3542.18', 1, 2021, 'receber', 0, '2021-01-26 00:03:52'),
 (4, 'Aluguel', 'Casa alugada', '680.00', 1, 2021, 'receber', 0, '2021-01-26 00:03:52'),
-(5, 'Bandeirante', 'Energia Elétrica', '97.25', 1, 2021, 'pagar', 0, '2021-01-26 00:03:52'),
+(5, 'Bandeirante', 'Energia Elétrica', '97.25', 1, 2021, 'pagar', 1, '2021-01-26 00:03:52'),
 (6, 'Bandeirante', 'Energia Elétrica', '81.25', 2, 2021, 'pagar', 0, '2021-01-26 00:03:52'),
-(7, 'Casas Bahia', 'Primeira conta particionada', '1000.00', 12, 2022, '', 0, '2022-04-05 00:25:27'),
+(7, 'Casas Bahia', 'Primeira conta particionada', '1000.00', 12, 2022, '', 1, '2022-04-05 00:25:27'),
 (8, 'Casas Bahia', 'Conta de energia elétrica', '2000.00', 5, 2022, '', 0, '2022-04-05 00:49:59'),
 (9, 'Casas Bahia', 'Sofá Cama', '3000.00', 9, 2022, 'pagar', 1, '2022-04-05 01:00:45'),
-(10, 'Lojas Cem', 'Sofá cama', '1800.00', 4, 2022, 'pagar', 0, '2022-04-11 22:54:33');
+(10, 'Lojas Cem', 'Sofá cama', '1800.00', 4, 2022, 'pagar', 1, '2022-04-11 22:54:33');
 
 -- --------------------------------------------------------
 
@@ -73,7 +73,10 @@ CREATE TABLE `email` (
 
 INSERT INTO `email` (`id`, `endereco`, `id_pessoa`) VALUES
 (1, 'AA@gmail.com', 5),
-(2, 'teste@gmail.com', 6);
+(2, 'teste@gmail.com', 6),
+(3, 'alexandre.tavares@gmail.com', 7),
+(4, 'alexandre.tavares@gmail.com', 8),
+(5, 'alexandre.tavares@gmail.com', 9);
 
 -- --------------------------------------------------------
 
@@ -99,7 +102,10 @@ INSERT INTO `pessoa` (`id`, `nome`, `snome`, `senha`, `created_at`) VALUES
 (3, 'AA', 'AA', 'AA', '2022-04-26 00:36:27'),
 (4, 'AA', 'AA', 'AA', '2022-04-26 00:37:47'),
 (5, 'AA', 'AA', 'AA', '2022-04-26 00:38:43'),
-(6, 'And', 'CG', '123', '2022-04-26 00:39:56');
+(6, 'And', 'CG', '123', '2022-04-26 00:39:56'),
+(7, 'Alexandre', 'Tavares', 'ea1418cb61174661f4fdee5a269c7033', '2022-05-10 01:13:19'),
+(8, 'Alexandre', 'Tavares', 'ea1418cb61174661f4fdee5a269c7033', '2022-05-10 01:15:05'),
+(9, 'Alexandre', 'Tavares', 'ea1418cb61174661f4fdee5a269c7033', '2022-05-10 01:15:58');
 
 -- --------------------------------------------------------
 
@@ -123,7 +129,10 @@ INSERT INTO `telefone` (`id`, `numero`, `id_pessoa`) VALUES
 (3, 'AAA', 3),
 (4, 'AAA', 4),
 (5, 'AAA', 5),
-(6, '11992499734', 6);
+(6, '11992499734', 6),
+(7, '11985856565', 7),
+(8, '11985856565', 8),
+(9, '11985856565', 9);
 
 --
 -- Índices para tabelas despejadas
@@ -167,19 +176,19 @@ ALTER TABLE `conta`
 -- AUTO_INCREMENT de tabela `email`
 --
 ALTER TABLE `email`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `pessoa`
 --
 ALTER TABLE `pessoa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `telefone`
 --
 ALTER TABLE `telefone`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
