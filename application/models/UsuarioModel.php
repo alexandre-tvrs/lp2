@@ -21,12 +21,10 @@ class UsuarioModel extends CI_Model {
 
           $fone['numero'] = $this->input->post('telefone');
           $fone['id_pessoa'] = $id;
-          $this->load->library('telefone');
           $this->telefone->create($fone);
 
           $mail['endereco'] = $this->input->post('email');
           $mail['id_pessoa'] = $id;
-          $this->load->library('mail');
           $this->mail->create($mail);
 
         } else {
@@ -35,11 +33,18 @@ class UsuarioModel extends CI_Model {
 
     }
 
-    public function update(){
+    public function update($id){
       if(sizeof($_POST) == 0) return;
 
       if($this->validator->validateUser(true)) {
+        $data = $this->readPostData();
+        $this->pessoa->update($data);
 
+        $fone['numero'] = $this->input->post('telefone');
+        $this->telefone->update($fone);
+
+        $mail['endereco'] = $this->input->post('email');
+        $this->telefone->update($mail);
       } else {
         return validation_errors();
       }
@@ -76,9 +81,13 @@ class UsuarioModel extends CI_Model {
     private function readPostData(){
       $data['nome'] = $this->input->post('nome');
       $data['snome'] = $this->input->post('snome');
-
       $pass = $this->input->post('senha');
-      $data['senha'] = md5($pass);
+
+      if(strlen($pass) > 0){
+        $data['senha'] = md5($pass);
+      }
+
+      return $data;
     }
 
 }
