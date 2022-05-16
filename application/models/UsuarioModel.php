@@ -38,13 +38,13 @@ class UsuarioModel extends CI_Model {
 
       if($this->validator->validateUser(true)) {
         $data = $this->readPostData();
-        $this->pessoa->update($data);
+        $this->pessoa->update($data, ['id' => $id]);
 
         $fone['numero'] = $this->input->post('telefone');
-        $this->telefone->update($fone);
+        $this->telefone->update($fone, ['id_pessoa' => $id]);
 
         $mail['endereco'] = $this->input->post('email');
-        $this->telefone->update($mail);
+        $this->mail->update($mail, ['id_pessoa' => $id]);
       } else {
         return validation_errors();
       }

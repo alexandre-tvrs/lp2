@@ -16,4 +16,6 @@ class Pessoa extends Dao {
       $res = $this->db->query($sql);
       return $res->result_array();
     }
+
+
 }

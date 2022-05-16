@@ -8,4 +8,6 @@ class Telefone extends Dao {
     function __construct() {
         parent::__construct('telefone');
     }
+
+
 }

@@ -8,4 +8,6 @@ class Mail extends Dao {
     function __construct() {
         parent::__construct('email');
     }
+
+
 }

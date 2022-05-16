@@ -27,4 +27,8 @@ class Dao extends CI_Object {
       $rs = $this->db->get_where($this->table, $v);
       return $rs->row_array();
     }
+
+    public function update($data, $condition){
+      $this->db->update($this->table, $data, $condition);
+    }
 }
