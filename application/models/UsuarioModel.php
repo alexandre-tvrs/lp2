@@ -45,6 +45,8 @@ class UsuarioModel extends CI_Model {
 
         $mail['endereco'] = $this->input->post('email');
         $this->mail->update($mail, ['id_pessoa' => $id]);
+
+        redirect(base_url('usuario'));
       } else {
         return validation_errors();
       }
