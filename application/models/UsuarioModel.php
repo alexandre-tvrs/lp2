@@ -65,6 +65,8 @@ class UsuarioModel extends CI_Model {
 
         $this->pessoa->apagar(['id' => $id]);
         redirect(base_url('usuario'));
+      } else {
+        return validation_errors();
       }
     }
 
