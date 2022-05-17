@@ -14,7 +14,6 @@ class ButtonGenerator{
 
     }
 
-
   public static function statusHandler($row) {
     $color = $row['liquidada'] ? 'blue' : 'red';
     $html  = '<a><i id="'.$row['id'];
@@ -23,5 +22,14 @@ class ButtonGenerator{
     return $html;
   }
 
-
+  public static function removeHandler($row, $url) {
+    if($url){
+      $html = '<a href="'.$url.'/'.$row['id'].'"><i id="'.$row['id'];
+    } else {
+      $html  = '<a><i id="'.$row['id'];
+    }
+    $html .= '"class="fas fa-ban mr-3 ';
+    $html .= 'red-text remove_btn"></i></a>';
+    return $html;
+  }
 }

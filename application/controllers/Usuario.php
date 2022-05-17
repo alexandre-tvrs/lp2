@@ -30,4 +30,11 @@ class Usuario extends MY_Controller{
     $this->show($html);
   }
 
+  public function apagar($id){
+    $this->user->remove($id);
+    $this->user->loadUser($id);
+    $html = $this->load->view('user/form_remove_user', null, true);
+    $this->show($html);
+  }
+
 }

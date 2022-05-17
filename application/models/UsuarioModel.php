@@ -52,13 +52,31 @@ class UsuarioModel extends CI_Model {
       }
     }
 
+    public function remove($id){
+      if(sizeof($_POST) == 0) return;
+
+      if($this->validator->validateUser(true)) {
+
+        $fone['numero'] = $this->input->post('telefone');
+        $this->telefone->apagar(['id_pessoa' => $id]);
+
+        $mail['endereco'] = $this->input->post('email');
+        $this->mail->apagar(['id_pessoa' => $id]);
+
+        $this->pessoa->apagar(['id' => $id]);
+        redirect(base_url('usuario'));
+      }
+    }
+
     public function listUser() {
       $data = $this->pessoa->listaPessoa();
 
-      $url = base_url('usuario/editar');
+      $url_edit = base_url('usuario/editar');
+      $url_remove = base_url('usuario/apagar');
 
       foreach ($data as $key => $row) {
-        $data[$key]['btn'] = ButtonGenerator::editHandler($row, $url);
+        $data[$key]['btn_edit'] = ButtonGenerator::editHandler($row, $url_edit);
+        $data[$key]['btn_remove'] = ButtonGenerator::removeHandler($row, $url_remove);
       }
 
       $label = ['', 'Nome', 'Sobrenome', 'Email', 'Telefone' ,''];

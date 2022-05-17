@@ -31,4 +31,8 @@ class Dao extends CI_Object {
     public function update($data, $condition){
       $this->db->update($this->table, $data, $condition);
     }
+
+    public function apagar($condition){
+      $this->db->delete($this->table, $condition);
+    }
 }
