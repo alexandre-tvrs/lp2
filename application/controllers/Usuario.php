@@ -37,4 +37,9 @@ class Usuario extends MY_Controller{
     $this->show($html);
   }
 
+  function poli() {
+    $this->load->model('PooModel');
+    $this->PooModel->polimorfismo();
+  }
+
 }
